@@ -1,0 +1,2245 @@
+:root {
+  --base-light: #00ffff;
+  --base-dark: #00008b;
+  --text-color: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  /* TTT palette */
+  --ttt-primary: #1976d2;
+  --ttt-secondary: #e3e3e3;
+  --ttt-accent: #d32f2f;
+  --ttt-x: #1976d2;
+  --ttt-o: #d32f2f;
+  --ttt-board-bg: #f6f8fb;
+  --ttt-win: #d32f2f;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: var(--base-dark);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.navbar {
+  background-color: var(--base-dark);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.logo-symbol {
+  color: var(--base-light);
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.hero {
+  padding-top: 120px;
+  padding-bottom: 64px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.subtitle {
+  color: var(--base-light);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 16px;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.btn {
+  background-color: var(--base-light);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.btn:hover {
+  background-color: #7691ff;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
+
+.btn-large {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+}
+
+/* --- Tic Tac Toe App Styles --- */
+.ttt-app-bg {
+  min-height: 100vh;
+  background: var(--ttt-board-bg);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+
+.ttt-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ttt-title {
+  margin-top: 48px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ttt-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.ttt-status {
+  margin: 26px 0 16px 0;
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--ttt-accent);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ttt-secondary);
+  border-radius: 12px;
+  border: 2px solid var(--ttt-primary);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px 0 rgb(23 118 210 / 6%);
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ttt-square {
+  width: 81px;
+  height: 81px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  border: none;
+  outline: none;
+  border-right: 2px solid var(--ttt-primary);
+  border-bottom: 2px solid var(--ttt-primary);
+  color: var(--ttt-x);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-board .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square:disabled,
+.ttt-square[aria-disabled="true"] {
+  cursor: default;
+  background: #eef0f2;
+  color: #b6b6b6;
+}
+
+.ttt-square--win {
+  background: var(--ttt-accent);
+  color: #fff;
+  animation: ttt-flash 0.8s 2;
+}
+
+@keyframes ttt-flash {
+  0%   { background: var(--ttt-accent); }
+  50%  { background: #fff7f7; color: var(--ttt-accent);}
+  100% { background: var(--ttt-accent);}
+}
+
+.ttt-square:nth-child(2n) {
+  color: var(--ttt-o);
+}
+
+.btn.ttt-reset {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: var(--ttt-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn.ttt-reset:hover,
+.btn.ttt-reset:focus {
+  background: var(--ttt-accent);
+  color: white;
+}
+
+.ttt-footer {
+  margin-top: 38px;
+  text-align: center;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+/* Responsive styles */
+@media (max-width: 575px) {
+  .ttt-board, .ttt-square {
+    width: 100%;
+    max-width: 99vw;
+  }
+  .ttt-square {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  .ttt-title {
+    font-size: 1.4rem;
+  }
+  .ttt-container {
+    padding: 18px 2vw;
+  }
+}
+
